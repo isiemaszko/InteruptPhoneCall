@@ -29,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.READ_PHONE_STATE},1);
             }
         }
+
+        if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
+                Manifest.permission.READ_CALL_LOG)){
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.READ_CALL_LOG},2);
+        }
+        else {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.READ_CALL_LOG},2);
+        }
     }
 
 
@@ -47,8 +57,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+            case 2:{
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    if(ContextCompat.checkSelfPermission(MainActivity.this,
+                            Manifest.permission.READ_CALL_LOG)==PackageManager.PERMISSION_GRANTED){
+                        Toast.makeText(this, "log granded!", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(this, "no log granded!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
         }
     }
 
-
+   // int readContactsPermissionLog = ContextCompat.checkSelfPermission (this, Manifest.permission.READ_CALL_LOG); if (readContactsPermissionLog! = PackageManager.PERMISSION_GRANTED) {listPermissionsNeeded.add (Manifest.permission.READ_CALL_LOG); } -
 }
